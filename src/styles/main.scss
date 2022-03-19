@@ -4,58 +4,9 @@ html,body{
   height: 100%;
   margin: 0;
 }
-
-nav{
-  width: 100vw;
-  border-bottom: 1px solid #c2c2c2;
-  padding: .5rem 0;
-  .content{
-    margin: auto;
-    max-width: 68rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-  }
-  .searchCont{
-    display: flex;
-    align-items: center;
-    background: #eeeeee;
-    padding: .6rem .8rem;
-    border-radius: 7px;
-    width: 15rem;
-    input{
-      border: none;
-      background: transparent;
-
-      &:focus{
-        outline: none;
-      }
-    }
-  }
-  .btns{
-    display: flex;
-    gap: 1.1rem;
-
-    svg,img{
-      $size: 1.6rem;
-      width: $size;
-      height: $size;
-      &.disabled{
-        color: #7a7a7a;
-        fill: #7a7a7a;
-      }
-      &:not(.disabled){
-        cursor: pointer;
-      }
-    }
-    img{
-      border-radius: 50%;
-    }
-  }
-  h1{
-    font-family: 'Inspiration', cursive;
-    font-size: 2.2rem;
-    margin: 0;
-    letter-spacing: .1rem;
-  }
+*{
+  box-sizing: border-box;
 }
+
+@import "nav";
+@import "profContextMenu";

@@ -1,0 +1,57 @@
+.profCont{
+  position: relative;
+}
+.profMenu{
+  $color: #444444;
+  width: max-content;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  border-radius: 4px;
+
+  position: absolute;
+  left: -650%;
+  top: 2.3rem;
+  *{
+    color: $color;
+  }
+  span{
+    text-align: left;
+  }
+  button:not(:last-of-type){
+    display: grid;
+    grid-template-columns: 1.8rem 1fr;
+    align-items: center;
+  }
+  button{
+    text-align: left;
+    padding: .7rem 5rem .7rem .8rem;
+    background: transparent;
+    border: none;
+    &:hover{
+      background: #f8f8f8;
+    }
+    svg{
+      $size: 1.1rem;
+      height: $size;
+      width: auto;
+
+      color: $color;
+      fill: $color;
+    }
+  }
+  button:last-of-type {
+    position: relative;
+    padding: .9rem 5rem .9rem .8rem;
+    &:after {
+      content: '';
+      background: #cbcbcb;
+      width: 100%;
+      height: 1px;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  }
+}
