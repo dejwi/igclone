@@ -1,0 +1,118 @@
+.postFeed{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+}
+.post{
+  border: 1px solid #e3e2e2;
+  border-radius: 4px;
+  width: 38rem;
+  background: #ffffff;
+  & > img{
+    max-width: 38rem;
+    max-height: 40rem;
+  }
+
+  .top{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: .6rem;
+    & > div{
+      display: grid;
+      grid-template-columns: 2rem 1fr;
+      grid-template-rows: 1fr 1fr;
+      align-items: center;
+      column-gap: .6rem;
+    }
+    img{
+      grid-row: span 2;
+      $size: 2.2rem;
+      width: $size;
+      height: $size;
+      border-radius: 50%;
+    }
+    span{
+        font-family: 'Roboto', sans-serif;
+        font-weight: 450;
+        margin-bottom: -.4rem;
+    }
+    p{
+      margin: 0;
+      color: #707070;
+      font-size: .8rem;
+    }
+  }
+
+  .btns{
+    margin: 1rem;
+    display: flex;
+    justify-content: space-between;
+    .left{
+      display: flex;
+      gap: 1rem;
+    }
+    svg{
+      $size: 1.7rem;
+      width: $size;
+      height: $size;
+    }
+  }
+
+  .likes{
+    margin-left: 1rem;
+    font-size: .9rem;
+    font-weight: 500;
+  }
+
+  .comments{
+    margin: 1rem;
+    margin-top: .2rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: .3rem;
+  }
+  .postComment{
+    *{
+      font-size: .9rem;
+    }
+    span{
+      font-weight: 600;
+    }
+    p {
+      margin: 0;
+    }
+    display: flex;
+    align-items: center;
+    gap: .3rem;
+  }
+
+  .addcomment{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 1rem;
+    position: relative;
+    &:after{
+      content: '';
+      position: absolute;
+      background: #cecece;
+      width: calc(100% + 2rem);
+      height: 1px;
+      top: -1rem;
+      left: -1rem;
+    }
+    input{
+      font-size: .9rem;
+      border: none;
+      background: transparent;
+      outline: none;
+    }
+  }
+  .allcomments{
+    color: gray;
+    margin: 1rem;
+  }
+}

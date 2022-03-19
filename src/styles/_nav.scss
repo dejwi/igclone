@@ -2,6 +2,9 @@ nav{
   width: 100vw;
   border-bottom: 1px solid #c2c2c2;
   padding: .5rem 0;
+  background: #ffffff;
+  position: fixed;
+  top: 0;
   .content{
     margin: auto;
     max-width: 68rem;
@@ -13,16 +16,21 @@ nav{
     display: flex;
     align-items: center;
     background: #eeeeee;
-    padding: .6rem .8rem;
+    padding: .5rem .8rem;
     border-radius: 7px;
     width: 15rem;
     input{
       border: none;
       background: transparent;
-
+      font-size: .9rem;
       &:focus{
         outline: none;
       }
+    }
+    svg{
+      $size: 1rem;
+      width: $size;
+      height: $size;
     }
   }
   .btns{
