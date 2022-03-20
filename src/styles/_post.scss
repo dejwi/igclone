@@ -9,10 +9,16 @@
   border-radius: 4px;
   width: 38rem;
   background: #ffffff;
-  & > img{
-    max-width: 38rem;
-    max-height: 40rem;
+  .imgContainer{
+    display: flex;
+    justify-content: center;
+    background: rgb(241, 241, 241);
+    & > img{
+      max-height: 40rem;
+      max-width: 38rem;
+    }
   }
+
 
   .top{
     display: flex;

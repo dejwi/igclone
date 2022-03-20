@@ -1,10 +1,46 @@
 import React, {useState} from "react";
 import ProfMenu from './ProfMenu';
+import { useAuthState} from "react-firebase-hooks/auth";
+import {auth,firestore} from './firebase';
+import firebase from "firebase/compat/app";
+import CreateNewPost from "./CreateNewPost";
 
-export default function NavBtns(props: { selected: 'home' | 'direct' | 'post' }) {
+export default function NavBtns(props: { selected: 'home' | 'direct' }) {
     const sel = props.selected;
     const [showProfMenu,setShowProfMenu] = useState(false);
+    const [showNewPost,setShowNewPost] = useState(false);
 
+    const [user] = useAuthState(auth as any);
+
+    const SignIn = () => {
+        const provider = new firebase.auth.GoogleAuthProvider();
+        auth.signInWithPopup(provider).then(data =>
+        {
+            const docRef = firestore.collection("users")
+                .where('uid','==',data.user!.uid);
+            docRef.get().then(snapshot => {
+                    if(snapshot.docs.length){
+                        console.log('exists');
+                    } else{
+                        console.log('doesnt');
+                        firestore.collection("users").add({
+                            uid: data.user!.uid,
+                            picurl: data.user!.photoURL,
+                            name: data.user!.displayName,
+                            tagname: `@${data.user!.displayName}`,
+                            liked: []
+                        });
+                    }
+                })
+            .catch(error => {
+                console.log(error);
+            });
+        });
+    };
+    const showNewPostClick = () => {
+        if(user)
+            setShowNewPost(true);
+    };
 
     return (<div className='btns'>
 
@@ -40,15 +76,9 @@ export default function NavBtns(props: { selected: 'home' | 'direct' | 'post' })
                      stroke="currentColor" stroke-linejoin="round" stroke-width="2"></polygon>
         </svg>}
 
-        {sel === 'post' ?
+
         <svg aria-label="New Post" className="_8-yf5 " color="#262626" fill="#262626" height="24" role="img"
-             viewBox="0 0 24 24" width="24">
-            <path
-                d="M12.003 5.545l-.117.006-.112.02a1 1 0 00-.764.857l-.007.117V11H6.544l-.116.007a1 1 0 00-.877.876L5.545 12l.007.117a1 1 0 00.877.876l.116.007h4.457l.001 4.454.007.116a1 1 0 00.876.877l.117.007.117-.007a1 1 0 00.876-.877l.007-.116V13h4.452l.116-.007a1 1 0 00.877-.876l.007-.117-.007-.117a1 1 0 00-.877-.876L17.455 11h-4.453l.001-4.455-.007-.117a1 1 0 00-.876-.877zM8.552.999h6.896c2.754 0 4.285.579 5.664 1.912 1.255 1.297 1.838 2.758 1.885 5.302L23 8.55v6.898c0 2.755-.578 4.286-1.912 5.664-1.298 1.255-2.759 1.838-5.302 1.885l-.338.003H8.552c-2.754 0-4.285-.579-5.664-1.912-1.255-1.297-1.839-2.758-1.885-5.302L1 15.45V8.551c0-2.754.579-4.286 1.912-5.664C4.21 1.633 5.67 1.05 8.214 1.002L8.552 1z"></path>
-        </svg>
-        :
-        <svg aria-label="New Post" className="_8-yf5 " color="#262626" fill="#262626" height="24" role="img"
-             viewBox="0 0 24 24" width="24">
+             viewBox="0 0 24 24" width="24" onClick={showNewPostClick}>
             <path
                 d="M2 12v3.45c0 2.849.698 4.005 1.606 4.944.94.909 2.098 1.608 4.946 1.608h6.896c2.848 0 4.006-.7 4.946-1.608C21.302 19.455 22 18.3 22 15.45V8.552c0-2.849-.698-4.006-1.606-4.945C19.454 2.7 18.296 2 15.448 2H8.552c-2.848 0-4.006.699-4.946 1.607C2.698 4.547 2 5.703 2 8.552z"
                 fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -57,7 +87,7 @@ export default function NavBtns(props: { selected: 'home' | 'direct' | 'post' })
                   stroke-width="2" x1="6.545" x2="17.455" y1="12.001" y2="12.001"></line>
             <line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                   stroke-width="2" x1="12.003" x2="12.003" y1="6.545" y2="17.455"></line>
-        </svg>}
+        </svg>
 
         <svg aria-label="Find People" className="disabled" height="24" role="img"
              viewBox="0 0 24 24" width="24">
@@ -85,12 +115,17 @@ export default function NavBtns(props: { selected: 'home' | 'direct' | 'post' })
         {/*        d="M34.6 3.1c-4.5 0-7.9 1.8-10.6 5.6-2.7-3.7-6.1-5.5-10.6-5.5C6 3.1 0 9.6 0 17.6c0 7.3 5.4 12 10.6 16.5.6.5 1.3 1.1 1.9 1.7l2.3 2c4.4 3.9 6.6 5.9 7.6 6.5.5.3 1.1.5 1.6.5s1.1-.2 1.6-.5c1-.6 2.8-2.2 7.8-6.8l2-1.8c.7-.6 1.3-1.2 2-1.7C42.7 29.6 48 25 48 17.6c0-8-6-14.5-13.4-14.5z"></path>*/}
         {/*</svg>*/}
 
-        <div className='profCont' >
-            <picture className={showProfMenu ? 'active' : ''}
-                     onClick={() => setShowProfMenu(!showProfMenu)}>
-                <img src='https://www.viewhotels.jp/ryogoku/wp-content/uploads/sites/9/2020/03/test-img.jpg'/>
-            </picture>
-            { showProfMenu ? <ProfMenu/> : null}
-        </div>
+        {user ?
+            <div className='profCont'>
+                <picture className={showProfMenu ? 'active' : ''}
+                         onClick={() => setShowProfMenu(!showProfMenu)}>
+                    <img src={user.photoURL ? user.photoURL : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQW2zB9ZfnqjeJkkgqMS7zen-NVpatbD9U3tiEirtof0QIA8Cx3ApChLYPJO9hVdncSkrA&usqp=CAU'}/>
+                </picture>
+                {showProfMenu ? <ProfMenu/> : null}
+            </div>
+            :
+            <button onClick={SignIn}>Login</button>
+        }
+        {showNewPost? <CreateNewPost hide={()=>{setShowNewPost(false)}}/> : null}
     </div>);
 }

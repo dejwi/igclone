@@ -1,22 +1,77 @@
 import React from "react";
 import PostComment from "./PostComment";
 import styled from "styled-components";
+import {useEffect,useState} from "react";
+import {firestore} from "./firebase";
+import PostLike from './postBtns/PostLike';
 
 const MargDiv = styled.div`
   margin-left: 1rem;
 `;
 
-export default function Post( props: {data: any} ){
-    const {picurl,likes,comments,timestamp,autorid,description} = props.data;
+interface datatype{
+    picurl: string,
+    likes: number,
+    comments: object,
+    timestamp: any,
+    autorid: string,
+    content: string,
+    postId: string
+}
+
+interface autortype {
+    name: string,
+    picurl: string,
+    tagname: string,
+    uid: string | null,
+    liked: any[]
+}
+
+export default function Post( props: {data: datatype} ){
+    const {picurl,comments,timestamp,autorid,content,postId} = props.data;
+    const [likes,setLikes] = useState(props.data.likes);
+    const [autor,setAutor] = useState({
+        name: 'name',
+        picurl: 'https://www.viewhotels.jp/ryogoku/wp-content/uploads/sites/9/2020/03/test-img.jpg',
+        tagname: '@name',
+        uid: null
+    } as autortype);
+
+    useEffect(() => {
+        firestore.collection('users')
+            .where('uid','==',autorid).get().then(snap => {
+            setAutor(snap.docs[0].data() as autortype);
+        });
+    },[]);
+
+    const addLike = () =>{
+      firestore.collection('posts').where('postId', '==',postId)
+          .get().then(snap => {
+             const likestemp = (snap.docs[0].data()).likes;
+             snap.docs[0].ref.update({likes: likestemp+1});
+             setLikes(likestemp+1);
+      });
+    };
+
+    const removeLike = () =>{
+        firestore.collection('posts').where('postId', '==',postId)
+            .get().then(snap => {
+            const likestemp = (snap.docs[0].data()).likes;
+            snap.docs[0].ref.update({likes: likestemp-1});
+            setLikes(likestemp-1);
+        });
+    };
+
     // new Date(1647710294 * 1000)
 
     return (<div className='post'>
         <div className='top'>
             {/* top */}
             <div>
-                <img src='https://www.viewhotels.jp/ryogoku/wp-content/uploads/sites/9/2020/03/test-img.jpg'/>
-                <span>barackobama</span>
-                <p>@dejw</p>
+                {/*https://www.viewhotels.jp/ryogoku/wp-content/uploads/sites/9/2020/03/test-img.jpg*/}
+                <img src={autor.picurl}/>
+                <span>{autor.name}</span>
+                <p>{autor.tagname}</p>
             </div>
             <svg aria-label="More options" className="_8-yf5 " color="#262626" fill="#262626" height="24" role="img"
                  viewBox="0 0 24 24" width="24">
@@ -25,15 +80,11 @@ export default function Post( props: {data: any} ){
                 <circle cx="18" cy="12" r="1.5"></circle>
             </svg>
         </div>
-        <img src={picurl}/>
+        <div className='imgContainer'><img src={picurl}/></div>
         <div className='btns'>
             {/* btns */}
             <div className='left'>
-                <svg aria-label="Like" color="#262626" fill="#262626" height="24" role="img"
-                     viewBox="0 0 24 24" width="24">
-                    <path
-                        d="M16.792 3.904A4.989 4.989 0 0121.5 9.122c0 3.072-2.652 4.959-5.197 7.222-2.512 2.243-3.865 3.469-4.303 3.752-.477-.309-2.143-1.823-4.303-3.752C5.141 14.072 2.5 12.167 2.5 9.122a4.989 4.989 0 014.708-5.218 4.21 4.21 0 013.675 1.941c.84 1.175.98 1.763 1.12 1.763s.278-.588 1.11-1.766a4.17 4.17 0 013.679-1.938m0-2a6.04 6.04 0 00-4.797 2.127 6.052 6.052 0 00-4.787-2.127A6.985 6.985 0 00.5 9.122c0 3.61 2.55 5.827 5.015 7.97.283.246.569.494.853.747l1.027.918a44.998 44.998 0 003.518 3.018 2 2 0 002.174 0 45.263 45.263 0 003.626-3.115l.922-.824c.293-.26.59-.519.885-.774 2.334-2.025 4.98-4.32 4.98-7.94a6.985 6.985 0 00-6.708-7.218z"></path>
-                </svg>
+                <PostLike postId={postId} likedown={removeLike} likeup={addLike}/>
                 <svg aria-label="Comment" color="#262626" fill="#262626" height="24" role="img"
                      viewBox="0 0 24 24" width="24">
                     <path d="M20.656 17.008a9.993 9.993 0 10-3.59 3.615L22 22z" fill="none" stroke="currentColor"
@@ -56,15 +107,19 @@ export default function Post( props: {data: any} ){
 
         <span className='likes'>{likes} likes</span>
         <MargDiv>
-            <PostComment autor='barackobama' content={description}/>
+            <PostComment autor={autor.name} content={content}/>
         </MargDiv>
         <span className='allcomments'>View all comments</span>
 
         <div className='comments'>
             {/* comments should be limited ex. 3*/}
-            <PostComment autor={'donaldtrump'} content={'nice cat not better than mine'}/>
-            <PostComment autor={'putin'} content={'ima bomb him'}/>
-            <PostComment autor={'zelensky'} content={'my cat got robbed'}/>
+            {!comments ?
+                [<PostComment autor={'donaldtrump'} content={'nice cat not better than mine'}/>,
+                <PostComment autor={'putin'} content={'ima bomb him'}/>,
+                <PostComment autor={'zelensky'} content={'my cat got robbed'}/>]
+                :
+                null
+            }
         </div>
         <div className='addcomment'>
             {/* add comment */}

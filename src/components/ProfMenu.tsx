@@ -1,3 +1,4 @@
+import {auth} from "./firebase";
 
 export default function ProfMenu(){
     return (<div className='profMenu'>
@@ -46,6 +47,6 @@ export default function ProfMenu(){
             <span>Switch Accounts</span>
         </button>
 
-        <button>Log Out</button>
+        <button onClick={()=>auth.signOut()}>Log Out</button>
     </div>);
 }
