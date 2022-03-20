@@ -29,7 +29,7 @@ export default function CreateNewPost(props: {hide: () => void}){
                    const data = {
                        picurl: url,
                        likes: 0,
-                       comments: {},
+                       comments: [],
                        timestamp:  timestamp(),
                        autorid: user.uid,
                        content,

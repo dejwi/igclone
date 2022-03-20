@@ -4,6 +4,7 @@ import styled from "styled-components";
 import {useEffect,useState} from "react";
 import {firestore} from "./firebase";
 import PostLike from './postBtns/PostLike';
+import AddComment from "./AddComment";
 
 const MargDiv = styled.div`
   margin-left: 1rem;
@@ -12,7 +13,11 @@ const MargDiv = styled.div`
 interface datatype{
     picurl: string,
     likes: number,
-    comments: object,
+    comments: {
+        autorId: string,
+        content: string,
+        timestamp: any
+    }[],
     timestamp: any,
     autorid: string,
     content: string,
@@ -107,29 +112,20 @@ export default function Post( props: {data: datatype} ){
 
         <span className='likes'>{likes} likes</span>
         <MargDiv>
-            <PostComment autor={autor.name} content={content}/>
+            <div className='postComment'>
+                <span>{autor.name}</span>
+                <p>{content}</p>
+            </div>
         </MargDiv>
         <span className='allcomments'>View all comments</span>
 
         <div className='comments'>
             {/* comments should be limited ex. 3*/}
-            {!comments ?
-                [<PostComment autor={'donaldtrump'} content={'nice cat not better than mine'}/>,
-                <PostComment autor={'putin'} content={'ima bomb him'}/>,
-                <PostComment autor={'zelensky'} content={'my cat got robbed'}/>]
-                :
-                null
-            }
+            {[...comments].slice(0,3).map(e => <PostComment data={e} key={e.content+e.autorId}/>)}
         </div>
         <div className='addcomment'>
             {/* add comment */}
-            <input type='text' placeholder='Add a comment...'/>
-
-            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512"
-                 className="home__card_send__2sMlQ" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
-                <path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"
-                      d="M470.3 271.15L43.16 447.31a7.83 7.83 0 01-11.16-7V327a8 8 0 016.51-7.86l247.62-47c17.36-3.29 17.36-28.15 0-31.44l-247.63-47a8 8 0 01-6.5-7.85V72.59c0-5.74 5.88-10.26 11.16-8L470.3 241.76a16 16 0 010 29.39z"></path>
-            </svg>
+            <AddComment type='feed' postId={postId}/>
         </div>
     </div>);
 }

@@ -1,15 +1,26 @@
-import styled from "styled-components";
+import {useState,useEffect} from "react";
+import {firestore} from "./firebase";
 
-const Span = styled.span`
+interface comment{
+    autorId: string,
+    content: string,
+    timestamp: any
+}
 
-`;
-const P = styled.p`
+export default function PostComment(props: {data: comment}){
+    const [name,setName] = useState('loading');
 
-`;
+    useEffect(()=>{
+        firestore.collection('users')
+            .where('uid','==',props.data.autorId).get().then(snap=>{
+           const data = snap.docs[0].data();
+            setName(data.name);
+        });
 
-export default function PostComment(props: {autor: string, content: string}){
+    },[]);
+
     return (<div className='postComment'>
-        <Span>{props.autor}</Span>
-        <P>{props.content}</P>
+        <span>{name}</span>
+        <p>{props.data.content}</p>
     </div>);
 }
