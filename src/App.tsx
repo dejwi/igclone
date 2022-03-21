@@ -2,13 +2,13 @@ import React from 'react';
 import './styles/main.scss';
 import Navbar from "./components/Navbar";
 import PostFeed from "./components/PostFeed";
-import {BrowserRouter,Routes,Route} from 'react-router-dom';
+import {BrowserRouter,Routes,Route,Router} from 'react-router-dom';
 import FullPost from "./components/FullPost";
 import ProfilePage from "./components/ProfilePage";
 
 function App() {
   return (<div>
-        <BrowserRouter>
+        <BrowserRouter >
             <Navbar/>
             <main>
             <Routes>

@@ -21,16 +21,13 @@
   span{
     text-align: left;
   }
-  button:not(:last-of-type){
+  a{
     display: grid;
     grid-template-columns: 1.8rem 1fr;
     align-items: center;
-  }
-  button{
     text-align: left;
     padding: .7rem 5rem .7rem .8rem;
-    background: transparent;
-    border: none;
+    text-decoration: none;
     &:hover{
       background: #f8f8f8;
     }
@@ -43,9 +40,15 @@
       fill: $color;
     }
   }
-  button:last-of-type {
+  button {
+    text-align: left;
+    background: transparent;
+    border: none;
+    &:hover{
+      background: #f8f8f8;
+    }
     position: relative;
-    padding: .9rem 5rem .9rem .8rem;
+    padding: .9rem 5rem .9rem 2.5rem;
     &:after {
       content: '';
       background: #cbcbcb;

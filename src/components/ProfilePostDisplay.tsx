@@ -20,18 +20,17 @@ export default function ProfilePostDisplay(props: {ids: string[]}){
     const [data,setData] = useState([] as datatype[])
 
     useEffect(()=>{
-        const promises = props.ids.map(id =>
-        firestore.collection('posts').where('postId','==',id).get());
+        if(props.ids.length){
+            const promises = props.ids.map(id =>
+                firestore.collection('posts').where('postId','==',id).get());
 
-        Promise.all(promises).then(res => {
-            const temp = res.map(snap =>
-               snap.docs[0].data() as datatype);
-            setData(temp);
-        });
+            Promise.all(promises).then(res => {
+                const temp = res.map(snap =>
+                    snap.docs[0].data() as datatype);
+                setData(temp);
+            });
+        }
     },[]);
-    useEffect(()=>{
-        console.log(data);
-    },[data]);
 
     return (<div className='postDisplay'>
         {data.map(post => <ProfilePost data={post} key={post.postId}/>)}

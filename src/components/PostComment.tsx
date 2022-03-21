@@ -25,7 +25,7 @@ export default function PostComment(props: {data: comment,type: 'feed' | 'full'}
     return (<div className='postComment'>
         {profSrc ? <img src={profSrc} alt="avatar"/> : null}
         <p>
-            <Link to={'/'}>{name}</Link>
+            <Link to={`/profile/${props.data.autorId}`}>{name}</Link>
             {props.data.content}
         </p>
     </div>);

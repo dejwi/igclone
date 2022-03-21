@@ -5,6 +5,7 @@ import {firestore} from "./firebase";
 import PostLike from './postBtns/PostLike';
 import AddComment from "./AddComment";
 import {Link} from "react-router-dom";
+import PostSave from "./postBtns/PostSave";
 
 
 interface datatype{
@@ -30,7 +31,8 @@ interface autortype {
     bio: string,
     followedby: any[],
     follows: any[],
-    posts: any[]
+    posts: any[],
+    saved: any[]
 }
 
 export default function Post( props: {data: datatype,type: 'feed' | 'full'} ){
@@ -91,24 +93,22 @@ export default function Post( props: {data: datatype,type: 'feed' | 'full'} ){
             {/* btns */}
             <div className='left'>
                 <PostLike postId={postId} likedown={removeLike} likeup={addLike}/>
+                <Link to={`/post/${postId}`}>
                 <svg aria-label="Comment" color="#262626" fill="#262626" height="24" role="img"
                      viewBox="0 0 24 24" width="24">
                     <path d="M20.656 17.008a9.993 9.993 0 10-3.59 3.615L22 22z" fill="none" stroke="currentColor"
-                          stroke-linejoin="round" stroke-width="2"></path>
+                          strokeLinejoin="round" strokeWidth="2"></path>
                 </svg>
+                </Link>
                 <svg aria-label="Share Post"  color="#262626" fill="#262626" height="24" role="img"
                      viewBox="0 0 24 24" width="24">
-                    <line fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2" x1="22" x2="9.218"
+                    <line fill="none" stroke="currentColor" strokeLinejoin="round" strokeWidth="2" x1="22" x2="9.218"
                           y1="3" y2="10.083"></line>
                     <polygon fill="none" points="11.698 20.334 22 3.001 2 3.001 9.218 10.084 11.698 20.334"
-                             stroke="currentColor" stroke-linejoin="round" stroke-width="2"></polygon>
+                             stroke="currentColor" strokeLinejoin="round" strokeWidth="2"></polygon>
                 </svg>
             </div>
-            <svg aria-label="Save"  color="#262626" fill="#262626" height="24" role="img"
-                 viewBox="0 0 24 24" width="24">
-                <polygon fill="none" points="20 21 12 13.44 4 21 4 3 20 3 20 21" stroke="currentColor"
-                         stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></polygon>
-            </svg>
+            <PostSave postId={postId}/>
         </div>
 
         <span className='likes'>{likes} likes</span>

@@ -4,6 +4,7 @@ import {firestore,auth} from "./firebase";
 import {useParams} from "react-router-dom";
 import {Link} from "react-router-dom";
 import ProfilePostDisplay from "./ProfilePostDisplay";
+import {useLocation} from "react-router-dom";
 
 interface Profiletype {
     name: string,
@@ -14,15 +15,20 @@ interface Profiletype {
     bio: string,
     followedby: any[],
     follows: any[],
-    posts: any[]
+    posts: any[],
+    saved: any[]
 }
 
 export default function ProfilePage() {
     const params = useParams() as {profileId: string};
     const [profileData,setProfileData] = useState(null as Profiletype | any);
     const [selected,setSelected] = useState('created' as 'created' | 'saved');
+    const location = useLocation() as {state: {showSaved: boolean} | null};
 
     useEffect(()=>{
+        if(location.state){
+            setSelected(location.state.showSaved ? 'saved' : 'created');
+        }
         firestore.collection('users')
             .where('uid','==',params.profileId).get().then(snap =>{
                 if(snap.docs.length){
@@ -53,15 +59,15 @@ export default function ProfilePage() {
             <div className='selectMenu'>
                 {selected === 'created' ? <>
                     <span className='selected'>POSTS</span>
-                    <button>SAVED</button>
+                    <button onClick={()=>setSelected('saved')}>SAVED</button>
                 </>:<>
-                    <button>POSTS</button>
+                    <button onClick={()=>setSelected('created')}>POSTS</button>
                     <span className='selected'>SAVED</span>
                 </>}
             </div>
             {selected === 'created' ?
-                <ProfilePostDisplay ids={profileData.posts}/>
-            :null}
+                <ProfilePostDisplay ids={profileData.posts} key={'created'}/>
+            : <ProfilePostDisplay ids={profileData.saved} key={'saved'}/> }
 
 
         </>: null}
