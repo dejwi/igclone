@@ -73,12 +73,12 @@ export default function Post( props: {data: datatype,type: 'feed' | 'full'} ){
     return (<div className='post'>
         <div className='top'>
             {/* top */}
-            <div>
+            <Link to={`/profile/${autor.uid}`}>
                 {/*https://www.viewhotels.jp/ryogoku/wp-content/uploads/sites/9/2020/03/test-img.jpg*/}
                 <img src={autor.picurl}/>
                 <span>{autor.name}</span>
                 <p>{autor.tagname}</p>
-            </div>
+            </Link>
             <svg aria-label="More options" className="_8-yf5 " color="#262626" fill="#262626" height="24" role="img"
                  viewBox="0 0 24 24" width="24">
                 <circle cx="12" cy="12" r="1.5"></circle>
@@ -118,11 +118,11 @@ export default function Post( props: {data: datatype,type: 'feed' | 'full'} ){
 
 
         {props.type === 'feed' ? <>
-            <Link to={`/post/${postId}`} className='allcomments'>View all comments</Link>
             <div className='postComment autorComment'>
-                <span>{autor.name}</span>
+                <Link to={`/profile/${autor.uid}`}>{autor.name}</Link>
                 <p>{content}</p>
             </div>
+            <Link to={`/post/${postId}`} className='allcomments'>View all comments</Link>
             </>
         : null}
 

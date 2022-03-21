@@ -3,6 +3,7 @@ import {useAuthState} from "react-firebase-hooks/auth";
 import {firestore,auth} from "./firebase";
 import {useParams} from "react-router-dom";
 import {Link} from "react-router-dom";
+import ProfilePostDisplay from "./ProfilePostDisplay";
 
 interface Profiletype {
     name: string,
@@ -51,16 +52,17 @@ export default function ProfilePage() {
             </div>
             <div className='selectMenu'>
                 {selected === 'created' ? <>
-                    <span>POSTS</span>
+                    <span className='selected'>POSTS</span>
                     <button>SAVED</button>
                 </>:<>
                     <button>POSTS</button>
-                    <span>SAVED</span>
+                    <span className='selected'>SAVED</span>
                 </>}
             </div>
-            <div className='posts'>
+            {selected === 'created' ?
+                <ProfilePostDisplay ids={profileData.posts}/>
+            :null}
 
-            </div>
 
         </>: null}
 
