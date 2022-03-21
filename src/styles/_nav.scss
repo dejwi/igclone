@@ -1,9 +1,10 @@
 nav{
-  width: 100vw;
+  max-width: 100vw;
   border-bottom: 1px solid #c2c2c2;
   padding: .5rem 0;
   background: #ffffff;
-  position: fixed;
+  position: sticky;
+  z-index: 20;
   top: 0;
   .content{
     margin: auto;
@@ -67,10 +68,12 @@ nav{
       }
     }
   }
-  h1{
+  .logo{
     font-family: 'Inspiration', cursive;
     font-size: 2.2rem;
     margin: 0;
     letter-spacing: .1rem;
+    text-decoration: none;
+    color: black;
   }
 }

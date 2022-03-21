@@ -14,11 +14,25 @@ html,body{
   font-family: 'Poppins', sans-serif;
 }
 
-main {
-  margin-top: 5rem;
+#root,#root>div{
+  min-height: 100vh;
 }
+#root>div{
+  display: flex;
+  flex-direction: column;
+}
+
+main{
+  z-index: 1;
+  //margin-top: 1.5rem;
+  flex: 1;
+  display: flex;
+}
+
+
 
 @import "nav";
 @import "profContextMenu";
 @import "post";
 @import "newPost";
+@import "fullPost";

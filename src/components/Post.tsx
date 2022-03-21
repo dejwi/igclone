@@ -1,14 +1,11 @@
 import React from "react";
 import PostComment from "./PostComment";
-import styled from "styled-components";
 import {useEffect,useState} from "react";
 import {firestore} from "./firebase";
 import PostLike from './postBtns/PostLike';
 import AddComment from "./AddComment";
+import {Link} from "react-router-dom";
 
-const MargDiv = styled.div`
-  margin-left: 1rem;
-`;
 
 interface datatype{
     picurl: string,
@@ -32,7 +29,7 @@ interface autortype {
     liked: any[]
 }
 
-export default function Post( props: {data: datatype} ){
+export default function Post( props: {data: datatype,type: 'feed' | 'full'} ){
     const {picurl,comments,timestamp,autorid,content,postId} = props.data;
     const [likes,setLikes] = useState(props.data.likes);
     const [autor,setAutor] = useState({
@@ -111,17 +108,25 @@ export default function Post( props: {data: datatype} ){
         </div>
 
         <span className='likes'>{likes} likes</span>
-        <MargDiv>
-            <div className='postComment'>
+
+
+
+
+
+        {props.type === 'feed' ? <>
+            <Link to={`/post/${postId}`} className='allcomments'>View all comments</Link>
+            <div className='postComment autorComment'>
                 <span>{autor.name}</span>
                 <p>{content}</p>
             </div>
-        </MargDiv>
-        <span className='allcomments'>View all comments</span>
+            </>
+        : null}
 
         <div className='comments'>
             {/* comments should be limited ex. 3*/}
-            {[...comments].slice(0,3).map(e => <PostComment data={e} key={e.content+e.autorId}/>)}
+            {props.type === 'feed' ?
+                [...comments].slice(0,3).map(e => <PostComment data={e} key={e.content+e.autorId} type={props.type}/>)
+            : comments.map(e => <PostComment data={e} key={e.content+e.autorId} type={props.type}/>)}
         </div>
         <div className='addcomment'>
             {/* add comment */}

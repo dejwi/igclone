@@ -1,12 +1,13 @@
 import NavBtns from "./NavBtns";
 import {useState} from 'react';
+import {Link} from "react-router-dom";
 
 export default function Navbar(){
     const [ActiveSearch,setActiveSearch] = useState(false);
 
         return (<nav>
             <div className='content'>
-                <h1>Codegram</h1>
+                <Link to='/' className='logo'>Poopgram</Link>
 
                 <div className='searchCont'>
                     {!ActiveSearch ? <svg aria-label="Search" className="_8-yf5 " color="#8e8e8e" fill="#8e8e8e" height="16" role="img"

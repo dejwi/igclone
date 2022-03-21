@@ -15,6 +15,6 @@ export default function PostFeed(){
     },[]);
 
     return (<div className='postFeed'>
-        {posts.map(e => <Post data={e} key={e.postId}/>)}
+        {posts.map(e => <Post data={e} key={e.postId} type='feed'/>)}
     </div>);
 }
