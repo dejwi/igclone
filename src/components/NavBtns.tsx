@@ -28,7 +28,11 @@ export default function NavBtns(props: { selected: 'home' | 'direct' }) {
                             picurl: data.user!.photoURL,
                             name: data.user!.displayName,
                             tagname: `@${data.user!.displayName}`,
-                            liked: []
+                            liked: [],
+                            follows: [],
+                            followedby: [],
+                            bio: '',
+                            posts: []
                         });
                     }
                 })

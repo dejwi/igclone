@@ -25,8 +25,12 @@ interface autortype {
     name: string,
     picurl: string,
     tagname: string,
-    uid: string | null,
-    liked: any[]
+    uid: string,
+    liked: any[],
+    bio: string,
+    followedby: any[],
+    follows: any[],
+    posts: any[]
 }
 
 export default function Post( props: {data: datatype,type: 'feed' | 'full'} ){
@@ -37,7 +41,7 @@ export default function Post( props: {data: datatype,type: 'feed' | 'full'} ){
         picurl: 'https://www.viewhotels.jp/ryogoku/wp-content/uploads/sites/9/2020/03/test-img.jpg',
         tagname: '@name',
         uid: null
-    } as autortype);
+    } as autortype | any);
 
     useEffect(() => {
         firestore.collection('users')

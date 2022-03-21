@@ -36,10 +36,21 @@ export default function CreateNewPost(props: {hide: () => void}){
                        postId
                    };
                    firestore.collection('posts').add(data);
+                   addPostToUser(postId);
                 });
             });
         }
         props.hide();
+    };
+
+    const addPostToUser = (postId: string) => {
+      if(user){
+          firestore.collection('users')
+              .where('uid','==',user.uid).get().then(snap => {
+                  const temp = (snap.docs[0].data()).posts;
+                  snap.docs[0].ref.update({posts: [...temp,postId]});
+          });
+      }
     };
 
     return(<div className='newPostCont' onClick={props.hide}>

@@ -1,0 +1,74 @@
+
+
+.profilePage{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .userInfo{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: .8rem;
+    margin-top: 4.5rem;
+
+    .top{
+      display: grid;
+      grid-template-columns: 10.5rem 1fr;
+      align-items: center;
+      row-gap: .5rem;
+    }
+
+    img{
+      @include imgSize(8rem);
+      border-radius: 50%;
+      grid-row: span 3;
+    }
+    h2,h3{
+      margin: 0;
+    }
+    $gap: -.5rem;
+    h2{
+      font-size: 2.3rem;
+      font-weight: 500;
+      margin-bottom: $gap;
+    }
+    h3{
+      font-size: 1.15rem;
+      font-weight: 400;
+      color: #a1a1a1;
+      margin-top: $gap;
+      margin-left: .1rem;
+    }
+    .stats{
+      display: flex;
+      gap: 1.8rem;
+      font-size: 1.2rem;
+    }
+  }
+  .selectMenu{
+    margin-top: .6rem;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    span,button{
+      font-size: 1.2rem;
+      padding: .5rem 1.2rem;
+    }
+    span{
+      color: #6e6e6e;
+    }
+    button{
+      color: black;
+      border: none;
+      background: transparent;
+    }
+    position: relative;
+    &:after{
+      @include lineTop(270%,0, #bdbdbd);
+    }
+
+  }
+}

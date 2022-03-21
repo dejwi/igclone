@@ -1,0 +1,12 @@
+@mixin imgSize($size){
+  width: $size;
+  height: $size;
+}
+@mixin lineTop($width,$top,$color){
+  content: '';
+  width: $width;
+  top: $top;
+  position: absolute;
+  height: 1px;
+  background: $color;
+}
