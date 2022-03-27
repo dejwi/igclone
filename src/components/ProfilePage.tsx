@@ -5,6 +5,7 @@ import {useParams} from "react-router-dom";
 import {Link} from "react-router-dom";
 import ProfilePostDisplay from "./ProfilePostDisplay";
 import {useLocation} from "react-router-dom";
+import FollowBtn from "./FollowBtn";
 
 interface Profiletype {
     name: string,
@@ -31,20 +32,25 @@ export default function ProfilePage() {
         }
         firestore.collection('users')
             .where('uid','==',params.profileId).get().then(snap =>{
-                if(snap.docs.length){
-                    setProfileData(snap.docs[0].data());
-                }
+            if(snap.docs.length){
+                setProfileData(snap.docs[0].data());
+            }
         });
-    },[]);
+    },[params]);
 
     return (<div className='profilePage'>
         {profileData ?<>
             <div className='userInfo'>
                 <div className='top'>
-                    <img src={profileData.picurl} alt='avatar'/>
+                    <div className='imgCont'>
+                        <img src={profileData.picurl} alt='avatar'/>
+                        <FollowBtn profileId={params.profileId} key={params.profileId}/>
+                    </div>
+
                     <div>
                         <h2>{profileData.name}</h2>
                         <h3>{profileData.tagname}</h3>
+
                     </div>
 
 
@@ -66,8 +72,8 @@ export default function ProfilePage() {
                 </>}
             </div>
             {selected === 'created' ?
-                <ProfilePostDisplay ids={profileData.posts} key={'created'}/>
-            : <ProfilePostDisplay ids={profileData.saved} key={'saved'}/> }
+                <ProfilePostDisplay ids={profileData.posts} key={`created${profileData.uid}`}/>
+            : <ProfilePostDisplay ids={profileData.saved} key={`saved${profileData.uid}`}/> }
 
 
         </>: null}

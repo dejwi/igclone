@@ -129,7 +129,7 @@ export default function NavBtns(props: { selected: 'home' | 'direct' }) {
                 {showProfMenu ? <ProfMenu close={()=>setShowProfMenu(false)}/> : null}
             </div>
             :
-            <button onClick={SignIn}>Login</button>
+            <button onClick={SignIn} className='loginBtn'>Login</button>
         }
         {showNewPost? <CreateNewPost hide={()=>{setShowNewPost(false)}}/> : null}
     </div>);

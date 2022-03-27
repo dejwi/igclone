@@ -20,13 +20,32 @@
       align-items: center;
       row-gap: .5rem;
     }
-
-    img{
-      @include imgSize(8rem);
-      border-radius: 50%;
+    .imgCont{
       grid-row: span 3;
-      object-fit: cover;
+      position: relative;
+      img{
+        @include imgSize(8rem);
+        border-radius: 50%;
+        object-fit: cover;
+      }
+      svg{
+        width: 2.5rem;
+        height: 2.3rem;
+        display: block;
+        position: absolute;
+        left: 3rem;
+        bottom: -.3rem;
+
+        padding: .4rem .5rem;
+        border-radius: 42%;
+        fill: #f6f6f6;
+
+        background: rgba(0, 0, 0, 0.31);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(5px);
+      }
     }
+
     h2,h3{
       margin: 0;
     }
@@ -128,5 +147,4 @@
       opacity: 100;
     }
   }
-
 }
