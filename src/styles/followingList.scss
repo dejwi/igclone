@@ -1,0 +1,105 @@
+.followingList{
+  width: 100%;
+  max-width: 100vw;
+  height: 100vh;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.28);
+  z-index: 999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .content{
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    width: 36rem;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+
+    p{
+      margin: 0;
+    }
+
+    .users{
+      height: 20rem;
+      overflow-y: scroll;
+      padding: 0 1.6rem;
+      padding-top: .6rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+
+      &>a{
+        display: grid;
+        grid-template-columns: 3.8rem 1fr;
+        grid-template-rows: 1fr 1fr;
+        align-items: center;
+        text-decoration: none;
+        color: black
+      }
+
+      img{
+        @include imgSize(3.4rem);
+        grid-row: span 2;
+        border-radius: 50%;
+      }
+
+      $spacing: -.4rem;
+      span {
+        font-weight: 500;
+        font-size: 1.35rem;
+        margin-bottom: $spacing;
+        color: black;
+      }
+      p {
+        margin: 0;
+        color: #707070;
+        font-size: .85rem;
+        margin-top: $spacing;
+      }
+
+
+
+    }
+
+    .btns{
+      display: flex;
+      justify-content: center;
+      gap: .6rem;
+
+      button,span{
+        font-size: 1.3rem;
+        border: none;
+        background: transparent;
+        padding: .4rem 1.2rem;
+      }
+      span{
+        color: #5e5e5e;
+
+        position: relative;
+        &:after{
+          content: '';
+          width: 100%;
+          position: absolute;
+          height: 1px;
+          background: rgb(0, 0, 0);
+          bottom: 0;
+          left: 0;
+        }
+      }
+
+      position: relative;
+      &:after{
+        content: '';
+        width: 100%;
+        position: absolute;
+        height: 1px;
+        background: rgba(0, 0, 0, 0.37);
+        bottom: 0;
+      }
+    }
+  }
+}

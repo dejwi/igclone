@@ -23,7 +23,6 @@ html,body{
 }
 
 main{
-  z-index: 1;
   //margin-top: 1.5rem;
   flex: 1;
   display: flex;
@@ -37,3 +36,4 @@ main{
 @import "newPost";
 @import "fullPost";
 @import "profilePage";
+@import "followingList";

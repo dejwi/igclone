@@ -6,6 +6,7 @@ import {Link} from "react-router-dom";
 import ProfilePostDisplay from "./ProfilePostDisplay";
 import {useLocation} from "react-router-dom";
 import FollowBtn from "./FollowBtn";
+import FollowingList from "./FollowingList";
 
 interface Profiletype {
     name: string,
@@ -25,6 +26,7 @@ export default function ProfilePage() {
     const [profileData,setProfileData] = useState(null as Profiletype | any);
     const [selected,setSelected] = useState('created' as 'created' | 'saved');
     const location = useLocation() as {state: {showSaved: boolean} | null};
+    const [follxList,setFollxList] = useState(null as null | 'followers' | 'following');
 
     useEffect(()=>{
         if(location.state){
@@ -53,11 +55,10 @@ export default function ProfilePage() {
 
                     </div>
 
-
                     <div className='stats'>
                         <span>{profileData.posts.length} posts</span>
-                        <span>{profileData.followedby.length} followers</span>
-                        <span>{profileData.follows.length} following</span>
+                        <span onClick={()=>setFollxList("followers")}>{profileData.followedby.length} followers</span>
+                        <span onClick={()=>setFollxList("following")}>{profileData.follows.length} following</span>
                     </div>
                 </div>
                 <span>{profileData.bio}</span>
@@ -74,7 +75,7 @@ export default function ProfilePage() {
             {selected === 'created' ?
                 <ProfilePostDisplay ids={profileData.posts} key={`created${profileData.uid}`}/>
             : <ProfilePostDisplay ids={profileData.saved} key={`saved${profileData.uid}`}/> }
-
+            {follxList ? <FollowingList type={follxList} profileId={params.profileId} hide={()=>setFollxList(null)}/> : null}
 
         </>: null}
 

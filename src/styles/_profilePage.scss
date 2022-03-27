@@ -66,6 +66,9 @@
       display: flex;
       gap: 1.8rem;
       font-size: 1.2rem;
+      span:not(:first-of-type){
+        cursor: pointer;
+      }
     }
   }
   .selectMenu{
