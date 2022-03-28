@@ -41,7 +41,6 @@ export default function FollowingList(props: {type: 'followers' | 'following', p
         Promise.all(promises).then(res => {
             const temp = res.map(snap => snap.docs[0].data() as ProfileData);
             setDisplayData(temp);
-            console.log(temp);
         });
     },[usedData]);
 
