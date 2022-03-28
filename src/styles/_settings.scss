@@ -1,0 +1,31 @@
+.settingsPage{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .content{
+    display: flex;
+    flex-direction: column;
+    gap: .2rem;
+
+    input{
+      margin-left: .8rem;
+      float: right;
+      border:none;
+      background: transparent;
+    }
+    button{
+      border: none;
+      background: transparent;
+      font-size: 1rem;
+      color: #3c8ee1;
+      cursor: pointer;
+
+      &.disabled{
+        color: #8c8c8c;
+        cursor: auto;
+      }
+    }
+  }
+}

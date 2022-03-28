@@ -5,6 +5,7 @@ import PostFeed from "./components/PostFeed";
 import {BrowserRouter,Routes,Route} from 'react-router-dom';
 import FullPost from "./components/FullPost";
 import ProfilePage from "./components/ProfilePage";
+import SettingsPage from "./components/SettingsPage";
 
 function App() {
   return (<div>
@@ -15,6 +16,7 @@ function App() {
                 <Route index element={<PostFeed/>}/>
                 <Route path='/post/:postId' element={<FullPost/>}/>
                 <Route path='/profile/:profileId' element={<ProfilePage/>}/>
+                <Route path='/settings' element={<SettingsPage/>}/>
             </Routes>
             </main>
         </BrowserRouter>

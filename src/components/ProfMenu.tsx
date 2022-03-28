@@ -30,7 +30,7 @@ export default function ProfMenu(props: {close: () => void}){
             <span>Saved</span>
         </Link>
 
-        <Link to={`/`} onClick={props.close}>
+        <Link to={`/settings`} onClick={props.close}>
             <svg aria-label="Settings" className="_8-yf5 " color="#262626" fill="#262626"  role="img"
                  viewBox="0 0 24 24" >
                 <circle cx="12" cy="12" fill="none" r="8.635" stroke="currentColor" strokeLinecap="round"
