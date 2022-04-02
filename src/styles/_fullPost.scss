@@ -36,7 +36,11 @@
         align-items: center;
         text-decoration: none;
       }
-
+      .moreOptions{
+        position: absolute;
+        top: .3rem;
+        right: .5rem;
+      }
       img {
         grid-row: span 2;
         $size: 3.8rem;
