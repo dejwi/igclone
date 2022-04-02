@@ -28,7 +28,7 @@ nav{
         outline: none;
       }
     }
-    svg{
+    &>svg{
       $size: 1rem;
       width: $size;
       height: $size;
