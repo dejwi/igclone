@@ -1,0 +1,88 @@
+.moreOptions{
+  position: relative;
+
+  &>svg{
+    cursor: pointer;
+  }
+}
+.postMenu{
+  position: absolute;
+  background: #ffffff;
+  border-radius: 4px;
+  top: 65%;
+  left: -30%;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  & > button{
+    background: transparent;
+    border: none;
+    display: grid;
+    grid-template-columns: 2rem 1fr;
+    align-items: center;
+    cursor: pointer;
+    padding: .3rem;
+
+    transition: background-color 0.15s ease-in-out;
+    &:hover{
+      background-color: #f1f1f1;
+    }
+    span{
+      width: max-content;
+      font-size: .85rem;
+    }
+
+    svg{
+      @include imgSize(1.3rem);
+    }
+  }
+
+
+}
+.deletePopup{
+  z-index: 99;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &>div{
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: .55rem .8rem;
+    border-radius: 4px;
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+  }
+  h4{
+    font-weight: 500;
+  }
+  .buttons{
+    display: flex;
+    gap: 2.2rem;
+
+    button{
+      border: none;
+      background: transparent;
+      padding: .3rem .6rem;
+      cursor: pointer;
+    }
+    .delete{
+      background: #fc4141;
+      border-radius: 5px;
+      color: #ececec;
+      font-weight: 400;
+    }
+  }
+
+}

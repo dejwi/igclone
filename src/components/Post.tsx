@@ -6,6 +6,7 @@ import PostLike from './postBtns/PostLike';
 import AddComment from "./AddComment";
 import {Link} from "react-router-dom";
 import PostSave from "./postBtns/PostSave";
+import PostMenu from "./PostMenu";
 
 
 interface datatype{
@@ -36,6 +37,8 @@ interface autortype {
 }
 
 export default function Post( props: {data: datatype,type: 'feed' | 'full'} ){
+    const [showMenu, setShowMenu] = useState(false);
+
     const {picurl,comments,timestamp,autorid,content,postId} = props.data;
     const [likes,setLikes] = useState(props.data.likes);
     const [autor,setAutor] = useState({
@@ -81,12 +84,18 @@ export default function Post( props: {data: datatype,type: 'feed' | 'full'} ){
                 <span>{autor.name}</span>
                 <p>{autor.tagname}</p>
             </Link>
-            <svg aria-label="More options" className="_8-yf5 " color="#262626" fill="#262626" height="24" role="img"
-                 viewBox="0 0 24 24" width="24">
-                <circle cx="12" cy="12" r="1.5"></circle>
-                <circle cx="6" cy="12" r="1.5"></circle>
-                <circle cx="18" cy="12" r="1.5"></circle>
-            </svg>
+            <div className="moreOptions">
+                <svg aria-label="More options" color="#262626" fill="#262626" height="24" role="img"
+                     viewBox="0 0 24 24" width="24" onClick={()=>setShowMenu(!showMenu)} >
+                    <circle cx="12" cy="12" r="1.5"></circle>
+                    <circle cx="6" cy="12" r="1.5"></circle>
+                    <circle cx="18" cy="12" r="1.5"></circle>
+                </svg>
+                {showMenu ? <PostMenu postPath={`${window.location.origin}/post/${postId}`}
+                                      hide={()=>setShowMenu(false)} data={props.data}/>
+                    : null}
+            </div>
+
         </div>
         <div className='imgContainer'><img src={picurl}/></div>
         <div className='btns'>
