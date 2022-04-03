@@ -42,6 +42,12 @@
 
 
 }
+@media (max-width: 780px) {
+  .postMenu{
+    right: -100%;
+    left: auto;
+  }
+}
 .deletePopup{
   z-index: 99;
   position: fixed;

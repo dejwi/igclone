@@ -40,6 +40,13 @@
         position: absolute;
         top: .3rem;
         right: .5rem;
+        
+        @media (max-width: 1235px) {
+          .postMenu{
+            right: -100%;
+            left: auto;
+          }
+        }
       }
       img {
         grid-row: span 2;
@@ -109,11 +116,23 @@
         $size: 2.2rem;
         width: $size;
         height: $size;
+        cursor: pointer;
       }
       .left{
         display: flex;
         gap: .5rem;
+        &>svg:first-of-type{
+          transition: transform 0.15s ease-in-out;
+          &:hover,&:focus{
+            transform: scale(1.1) rotate(6deg);
+          }
+        }
+        &>svg:last-of-type{
+          color: #595959;
+          cursor: auto;
+        }
       }
+
     }
 
     .likes {
@@ -208,6 +227,41 @@
         border: none;
         background: transparent;
         outline: none;
+      }
+    }
+  }
+}
+@media (max-width: 1100px) {
+  .postFull .post{
+    grid-template-areas: "img"
+                        "top"
+                        "comments"
+                        "btns"
+                        "likes"
+                        "addcomment";
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 7.6rem 15rem 3rem 1.7rem 3rem;
+    max-height: 70rem;
+    width: calc(100vw - 3rem);
+
+  }
+  .postFull{
+    margin-top: 1rem;
+  }
+}
+@media (max-width: 740px) {
+  .postFull .post {
+    grid-template-rows: 1fr 6rem 15rem 3rem 1.7rem 3rem;
+    .top a{
+      grid-template-columns: 3.8rem 1fr;
+      span {
+        font-size: 1.2rem;
+      }
+      p {
+        font-size: 0.8rem;
+      }
+      img {
+        @include imgSize(3.2rem);
       }
     }
   }

@@ -1,3 +1,7 @@
+@keyframes appear {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
 .postFeed {
   display: flex;
   flex-direction: column;
@@ -11,6 +15,11 @@
     border-radius: 4px;
     width: 38rem;
     background: #ffffff;
+    animation: appear 0.3s ease-in-out;
+
+    @media (max-width: 680px) {
+      width: calc(100vw - 3.4rem);
+    }
 
     .imgContainer {
       display: flex;
@@ -19,9 +28,10 @@
 
       & > img {
         max-height: 40rem;
-        max-width: 38rem;
+        max-width: 100%;
       }
     }
+
 
 
     .top {
@@ -69,12 +79,24 @@
       .left {
         display: flex;
         gap: 1rem;
+
+        &>svg:first-of-type{
+          transition: transform 0.15s ease-in-out;
+          &:hover,&:focus{
+            transform: scale(1.1) rotate(6deg);
+          }
+        }
+        &>svg:last-of-type{
+          color: #595959;
+          cursor: auto;
+        }
       }
 
       svg {
         $size: 1.7rem;
         width: $size;
         height: $size;
+        cursor: pointer;
       }
     }
 

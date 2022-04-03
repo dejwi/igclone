@@ -17,7 +17,7 @@ interface datatype{
 
 export default function ProfilePost(props: {data: datatype}){
     return ( <Link to={`/post/${props.data.postId}`}>
-        <img src={props.data.picurl}/>
+        <img src={props.data.picurl} placeholder='blur'/>
         <div>
             <svg aria-label="Like" color="#262626" fill="#262626" height="24" role="img"
                  viewBox="0 0 24 24" width="24">

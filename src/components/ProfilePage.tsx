@@ -7,6 +7,8 @@ import ProfilePostDisplay from "./ProfilePostDisplay";
 import {useLocation} from "react-router-dom";
 import FollowBtn from "./FollowBtn";
 import FollowingList from "./FollowingList";
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 interface Profiletype {
     name: string,
@@ -77,7 +79,33 @@ export default function ProfilePage() {
             : <ProfilePostDisplay ids={profileData.saved} key={`saved${profileData.uid}`}/> }
             {follxList ? <FollowingList type={follxList} profileId={params.profileId} hide={()=>setFollxList(null)}/> : null}
 
-        </>: null}
+        </>: <>
+        <SkeletonTheme baseColor='#F5F5F5' highlightColor='#ffffff'>
+            <div className='userInfo'>
+                <div className='top'>
+                    <div className='imgCont'>
+                        <Skeleton circle={true} width={'8rem'} height={'8rem'}/>
+                    </div>
+
+                    <div>
+                        <Skeleton width={'10rem'} height={'1.8rem'} borderRadius={20}/>
+                        <Skeleton width={'6rem'} height={'1.4rem'} borderRadius={20}/>
+                    </div>
+
+                    <div className='stats'>
+                        <Skeleton width={'7rem'} height={'1.6rem'} />
+                        <Skeleton width={'7rem'} height={'1.6rem'} />
+                        <Skeleton width={'7rem'} height={'1.6rem'} />
+                    </div>
+                </div>
+                <Skeleton width={'15rem'} height={'1.5rem'}/>
+            </div>
+            <div className='selectMenu'>
+                    <span className='selected'>POSTS</span>
+                    <button>SAVED</button>
+            </div>
+        </SkeletonTheme>
+        </>}
 
     </div>)
 }

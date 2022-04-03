@@ -13,6 +13,7 @@ nav{
     align-items: center;
     justify-content: space-around;
   }
+
   .searchCont{
     display: flex;
     align-items: center;
@@ -34,6 +35,12 @@ nav{
       height: $size;
     }
   }
+  @media (max-width: 560px) {
+    .searchCont{
+      display: none;
+    }
+  }
+
   .btns{
     display: flex;
     gap: 1.1rem;
@@ -66,6 +73,11 @@ nav{
         border-radius: 50%;
         border: 1px solid black;
       }
+    }
+  }
+  @media (max-width: 820px) {
+    .btns svg:nth-child(2),.btns svg:nth-child(4),.btns svg:nth-child(5){
+      display: none;
     }
   }
   .logo{

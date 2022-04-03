@@ -71,3 +71,24 @@
     }
   }
 }
+@media (max-width: 1200px) {
+  .profMenu{
+    left: auto;
+    right: -2.8rem;
+    top: 2.8rem;
+    &>svg{
+      left: auto;
+      right: 2.8rem;
+    }
+  }
+}
+@media (max-width: 600px){
+  .profMenu {
+    a,button{
+      font-size: .7rem;
+    }
+    button{
+      padding: .7rem 5rem .7rem 2.8rem;
+    }
+  }
+}
