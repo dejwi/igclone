@@ -100,6 +100,7 @@
     position: relative;
     &:after{
       @include lineTop(270%,0, rgba(0, 0, 0, 0.22));
+      max-width: calc(100vw - 3rem);
     }
 
   }
