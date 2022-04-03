@@ -25,14 +25,18 @@
     align-items: center;
     cursor: pointer;
     padding: .3rem;
+    padding-right: .5rem;
+    color: black;
 
     transition: background-color 0.15s ease-in-out;
     &:hover{
       background-color: #f1f1f1;
     }
     span{
-      width: max-content;
+      text-align: left;
+      white-space:nowrap;
       font-size: .85rem;
+      color: black;
     }
 
     svg{
@@ -44,7 +48,7 @@
 }
 @media (max-width: 780px) {
   .postMenu{
-    right: -100%;
+    right: -1.2rem;
     left: auto;
   }
 }
@@ -82,6 +86,9 @@
       background: transparent;
       padding: .3rem .6rem;
       cursor: pointer;
+    }
+    button:first-of-type{
+      color: black;
     }
     .delete{
       background: #fc4141;
