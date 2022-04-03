@@ -23,7 +23,7 @@ export default function AddComment(props: {type: 'feed' | 'full', postId: string
     };
 
     return (<>
-        <input type='text' placeholder='Add a comment...' value={content} onChange={e => setContent(e.target.value)}/>,
+        <input type='text' placeholder='Add a comment...' value={content} onChange={e => setContent(e.target.value)}/>
         <svg onClick={addComment} stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 512 512"
              className="home__card_send__2sMlQ" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
             <path fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32"
