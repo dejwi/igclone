@@ -121,3 +121,8 @@
     }
   }
 }
+@media (max-width: 600px) {
+  .followingList .content{
+    max-width: calc(100vw - 2rem);
+  }
+}
