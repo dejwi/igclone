@@ -123,7 +123,7 @@
         gap: .5rem;
         &>svg:first-of-type{
           transition: transform 0.15s ease-in-out;
-          &:hover,&:focus{
+          &:hover{
             transform: scale(1.1) rotate(6deg);
           }
         }
